@@ -51,8 +51,8 @@ class App extends Component {
               <li key={item.id}>
                 <h2>{item.attributes.name}</h2>
                 <img
-                  src="item.attributes.image_url"
-                  alt="item.attributes.description"
+                  src={item.attributes.image_url}
+                  alt={item.attributes.description}
                   height="60"
                 />
               </li>
