@@ -1,50 +1,50 @@
-import React, { Component } from "react";
-import config from "./config";
+import React, { Component } from 'react'
+import config from './config'
 
 const getToken = () =>
   fetch(`${config.apiUrl}/oauth/token`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      grant_type: "client_credentials",
+      grant_type: 'client_credentials',
       client_id: config.clientId,
-      scope: config.scope
-    })
-  }).then(res => res.json());
+      scope: config.scope,
+    }),
+  }).then(res => res.json())
 
 const getSkus = access_token =>
   fetch(`${config.apiUrl}/api/skus`, {
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${access_token}`
-    }
-  }).then(res => res.json());
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    },
+  }).then(res => res.json())
 
 class App extends Component {
   state = {
     isLoading: true,
-    products: []
-  };
+    products: [],
+  }
 
   async componentDidMount() {
-    const { access_token } = await getToken();
+    const { access_token } = await getToken()
 
-    const products = await getSkus(access_token);
+    const products = await getSkus(access_token)
 
-    this.setState({ isLoading: false, products });
+    this.setState({ isLoading: false, products })
   }
 
   render() {
     const {
       isLoading,
-      products: { data }
-    } = this.state;
+      products: { data },
+    } = this.state
     return (
       <div>
         <h1>This is an E-Commerce App</h1>
-        {isLoading && "Loading..."}
+        {isLoading && 'Loading...'}
         {!isLoading && (
           <ul>
             {data.map(item => (
@@ -60,8 +60,8 @@ class App extends Component {
           </ul>
         )}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
