@@ -43,7 +43,7 @@ class App extends Component {
     } = this.state
     return (
       <div>
-        <h1>This is an E-Commerce App</h1>
+        <h1>Welcome to the Purple Brand Store</h1>
         {isLoading && 'Loading...'}
         {!isLoading && (
           <ul>
