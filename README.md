@@ -1,4 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). React-specific information can be found from _Available Scripts_ onwards.
+
+The app is an e-commerce website, done as a practice project during STRV's React Nights 2019. The event's repo can be found [here](https://github.com/strvcom/react-nights-2019).
+
+The app uses the [Commercelayer API](https://commercelayer.io/).
+
+## Code Quality Tools
+
+- [eslint](https://eslint.org/) with [configs](https://github.com/strvcom/code-quality-tools/tree/master/packages/eslint-config-react) from STRV
+- [prettier](https://prettier.io/)
+- [husky](https://github.com/typicode/husky) + [lint-staged](https://github.com/okonet/lint-staged)
 
 ## Available Scripts
 
