@@ -16,6 +16,7 @@ const getToken = () =>
 
 const getSkus = access_token =>
   fetch(`${config.apiUrl}/api/skus`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${access_token}`,
@@ -25,7 +26,7 @@ const getSkus = access_token =>
 class App extends Component {
   state = {
     isLoading: true,
-    products: [],
+    products: {},
   }
 
   async componentDidMount() {
@@ -45,7 +46,7 @@ class App extends Component {
       <div>
         <h1>Welcome to the Purple Brand Store</h1>
         {isLoading && 'Loading...'}
-        {!isLoading && (
+        {data && (
           <ul>
             {data.map(item => (
               <li key={item.id}>
@@ -53,6 +54,7 @@ class App extends Component {
                 <img
                   src={item.attributes.image_url}
                   alt={item.attributes.description}
+                  // TODO: replace with css file
                   height="60"
                 />
               </li>
