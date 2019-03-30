@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
 import ProductListComponent from './components/List'
 import Layout from '../../components/Layout'

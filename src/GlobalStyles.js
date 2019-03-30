@@ -34,7 +34,7 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     font-family: 'circular', sans-serif;
     font-weight: 100;
-    background-color: ${presets.color.softGray};
+    background-color: ${presets.color.white};
   }
   #root {
     width: 100%;

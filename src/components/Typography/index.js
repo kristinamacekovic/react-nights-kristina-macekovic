@@ -4,8 +4,8 @@ import theme from '../../global/presets'
 
 const headerFonts = css`
   font-family: circular, serif;
-  font-weight: 400;
-  color: ${theme.color.red};
+  font-weight: 700;
+  color: ${theme.color.purple};
   text-transform: uppercase;
   ${textAlign}
 `

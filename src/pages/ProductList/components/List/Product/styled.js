@@ -15,6 +15,11 @@ export const Link = styled(BaseLink)`
   text-align: center;
   margin-bottom: 1rem;
   width: 35rem;
+  box-shadow: ${presets.shadow.lively};
+  &:hover {
+    box-shadow: ${presets.shadow.pink};
+  }
+  border: ${presets.border.basic};
 `
 
 export const ImgWrap = styled.div`
@@ -25,7 +30,7 @@ export const ImgWrap = styled.div`
 `
 
 export const Price = styled.div`
-  color: ${presets.color.red};
+  color: ${presets.color.darkPurple};
   font-size: 1.8rem;
   margin-top: 2rem;
 `
@@ -44,4 +49,5 @@ export const Title = styled.h3`
   font-size: 1.6rem;
   font-weight: 100;
   text-transform: uppercase;
+  color: ${presets.color.purple};
 `
