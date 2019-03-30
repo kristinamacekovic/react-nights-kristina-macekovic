@@ -19,20 +19,6 @@ export const Accent = styled.span`
   font-weight: bold;
 `
 
-/* export const Inventory = styled.div`
-  color: ${presets.color.red};
-  text-transform: uppercase;
-`
-
-export const Available = styled.section`
-  color: green;
-  text-transform: uppercase;
-`
-export const NotAvailable = styled.section`
-  color: ${presets.color.red};
-  text-transform: uupercase;
-` */
-
 export const ProductDetailImgWrap = styled.div`
   height:30rem;
   height: 30rem;

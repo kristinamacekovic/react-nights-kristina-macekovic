@@ -12,6 +12,10 @@ export const getSKUs = async () => {
     },
   })
 
+  if (!res.ok) {
+    throw new Error("Can't fetch list of products!")
+  }
+
   const products = await res.json()
 
   return products.data.map(product => ({

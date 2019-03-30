@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <GlobalStyles />
-        <H1 textAlign="center">Welcome to the Purple Brand Store</H1>
+        <H1>Welcome to the Purple Brand Store</H1>
         <Switch>
           <Route path="/" exact component={ProductList} />
           <Route path="/:productID" component={ProductDetail} />

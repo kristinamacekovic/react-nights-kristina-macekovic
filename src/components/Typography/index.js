@@ -7,11 +7,12 @@ const headerFonts = css`
   font-weight: 700;
   color: ${theme.color.purple};
   text-transform: uppercase;
-  ${textAlign}
+  ${textAlign};
 `
 
 export const H1 = styled.h1`
-  ${headerFonts}
+  ${headerFonts};
+  text-align: center;
 `
 
 export const H3 = styled.h3`
