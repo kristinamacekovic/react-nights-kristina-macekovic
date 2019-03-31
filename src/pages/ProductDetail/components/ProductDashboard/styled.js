@@ -19,6 +19,16 @@ export const Accent = styled.span`
   font-weight: bold;
 `
 
+export const Positive = styled.span`
+  color: ${presets.color.teal};
+  font-weight: bold;
+`
+
+export const Negative = styled.span`
+  color: ${presets.color.red};
+  font-weight: bold;
+`
+
 export const ProductDetailImgWrap = styled.div`
   height:30rem;
   height: 30rem;

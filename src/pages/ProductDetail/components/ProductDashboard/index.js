@@ -9,11 +9,15 @@ import {
   ProductDetailTitle,
   Description,
   Accent,
+  Positive,
+  Negative
 } from './styled'
 
 class ProductDashboard extends Component {
   state = {
-    attributes: {}
+    attributes: {
+      inventory: {}
+    }
   }
 
   async componentDidMount() {
@@ -45,6 +49,9 @@ class ProductDashboard extends Component {
         </Description>
         <Description>
           <Accent>Description:</Accent> {this.state.attributes.description}
+        </Description>
+        <Description>
+        {this.state.attributes.inventory.available ? <Positive>In Stock: {this.state.attributes.inventory.quantity}</Positive> : <Negative>Not In Stock</Negative>}
         </Description>
       </ProductDetailWrapper>
     )
