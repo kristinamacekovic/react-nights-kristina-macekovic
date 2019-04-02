@@ -18,13 +18,15 @@ export const getSKUs = async () => {
 
   const products = await res.json()
 
-  const prices = products.included.find(
-    price => price.id === products.relationships.prices.data[0].id
-  )
+  return products.data.map(product => {
+    const prices = products.included.find(
+      price => price.id === product.relationships.prices.data[0].id
+    )
 
-  return products.data.map(product => ({
-    ...product.attributes,
-    id: product.id,
-    price: prices ? prices.attributes : null
-  }))
+    return {
+      ...product.attributes,
+      id: product.id,
+      price: prices ? prices.attributes : null
+    }
+  })
 }
