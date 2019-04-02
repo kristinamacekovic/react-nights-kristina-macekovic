@@ -12,6 +12,12 @@ The app uses the [Commercelayer API](https://commercelayer.io/).
 - [prettier](https://prettier.io/)
 - [husky](https://github.com/typicode/husky) + [lint-staged](https://github.com/okonet/lint-staged)
 
+## Routing
+Routing is done dynamically using [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start).
+
+## Styling
+Styling is done using [Styled Components](https://www.styled-components.com/)
+
 ## Available Scripts
 
 In the project directory, you can run:

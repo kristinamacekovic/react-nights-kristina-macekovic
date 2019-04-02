@@ -18,20 +18,13 @@ export const getSKUs = async () => {
 
   const products = await res.json()
 
-  const skus = products.data.map(product => ({
+  const prices = products.included.find(
+    price => price.id === products.relationships.prices.data[0].id
+  )
+
+  return products.data.map(product => ({
     ...product.attributes,
     id: product.id,
-    price: products.included.find(
-      price => price.id === product.relationships.prices.data[0].id
-    ).attributes,
+    price: prices ? prices.attributes : null
   }))
-  if (skus) {
-    return skus
-  } else {
-    return products.data.map(product => ({
-      ...product.attributes,
-      id: product.id,
-      price: null
-    }))
-  }
 }
