@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ListWrap = styled.ul`
+export const ProductsWrap = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
