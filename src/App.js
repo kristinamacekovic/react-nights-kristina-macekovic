@@ -14,7 +14,6 @@ class App extends Component {
   render() {
     return (
        <Provider store={store}>
-        <React.Fragment>
           <GlobalStyles />
           <H1>Welcome to the Purple Brand Store</H1>
           <Switch>
@@ -22,7 +21,6 @@ class App extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/:productID" component={ProductDetail} />
           </Switch>
-        </React.Fragment>
       </Provider>
     )
   }

@@ -15,23 +15,17 @@ class ProductDetailPage extends Component {
     const { match } = this.props
     const id = match.params.productID
     return (
-      <div>
-        <ProductDashboard id={id} onAddToCart={this.handleAddToCart}/>
-      </div>
+      <ProductDashboard id={id} onAddToCart={this.handleAddToCart}/>
     )
   }
 }
-
-const mapStateToProps = state => ({
-
-})
 
 const mapDispatchToProps = {
   addProduct,
 }
 
 const ProductDetail = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ProductDetailPage)
 

@@ -15,6 +15,7 @@ class Products extends Component {
   }
 
   async componentDidMount() {
+
     if (this.props.products.length === 0) {
       const products = await getSKUs()
       this.props.loadProducts(products)
@@ -33,16 +34,17 @@ class Products extends Component {
   render() {
     return (
       <Layout>
-        {this.state.isLoading && <Loader />}
-        <ProductsWrap>
-          {this.props.products.map(product => (
-            <Product
-              key={product.id}
-              node={product}
-              onAddToCart={this.handleAddToCart}
-            />
-          ))}
-        </ProductsWrap>
+        {!this.props.products ? <Loader /> :
+          <ProductsWrap>
+            {this.props.products.map(product => (
+              <Product
+                key={product.id}
+                node={product}
+                onAddToCart={this.handleAddToCart}
+              />
+            ))}
+          </ProductsWrap>
+        }
       </Layout>
     )
   }
