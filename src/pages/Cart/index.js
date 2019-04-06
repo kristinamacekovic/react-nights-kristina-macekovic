@@ -3,8 +3,16 @@ import { connect } from 'react-redux'
 
 import Layout from '../../components/Layout'
 import { H1 } from '../../components/Typography'
+import { removeProduct } from '../../store/cartItems/actions'
+import CartItem from './CartItem'
 
 class CartView extends Component {
+
+  handleRemoveFromCart = (productId, evt) => {
+    evt.preventDefault()
+    this.props.removeProduct(productId)
+  }
+
   render() {
     return (
       <Layout>
@@ -12,7 +20,10 @@ class CartView extends Component {
         <ul>
           {this.props.items.map(item => (
             <li key={item.product.id}>
-              {item.product.name} - {item.quantity}
+              <CartItem
+                key={item.product.id}
+                node={item}
+                onRemoveFromCart={this.handleRemoveFromCart} />
             </li>
           ))}
         </ul>
@@ -28,6 +39,10 @@ const mapStateToProps = state => ({
   })),
 })
 
-const Cart = connect(mapStateToProps)(CartView)
+const mapDispatchToProps = {
+  removeProduct,
+}
+
+const Cart = connect(mapStateToProps, mapDispatchToProps)(CartView)
 
 export { Cart }
