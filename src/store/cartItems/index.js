@@ -8,10 +8,17 @@ const reducer = (state = {}, action) => {
         ...state,
         [action.payload]: (state[action.payload] || 0) + 1,
       }
-    case REMOVE_PRODUCT:
-      return {
-        ...state,
-        [action.payload]: (state[action.payload]===0) ? state[action.payload]:(state[action.payload]-1),
+    case REMOVE_PRODUCT: {
+        const newState = {
+          ...state,
+          [action.payload]: state[action.payload] - 1
+        }
+
+        if (newState[action.payload] === 0) {
+          delete newState[action.payload]
+        }
+
+        return newState
       }
     default:
       return state
