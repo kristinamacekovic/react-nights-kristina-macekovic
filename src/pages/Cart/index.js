@@ -19,7 +19,7 @@ class CartView extends Component {
         <H1>My cart</H1>
         <ul>
           {this.props.items.map(item => (
-            <li>
+            <li key={item.product.id}>
               <CartItem
                 key={item.product.id}
                 node={item}
