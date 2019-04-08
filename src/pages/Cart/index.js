@@ -21,7 +21,6 @@ class CartView extends Component {
           {this.props.items.map(item => (
             <li key={item.product.id}>
               <CartItem
-                key={item.product.id}
                 node={item}
                 onRemoveFromCart={this.handleRemoveFromCart} />
             </li>
