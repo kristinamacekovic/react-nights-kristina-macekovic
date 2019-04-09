@@ -9,18 +9,17 @@ import { ProductDetail } from './pages/ProductDetail'
 import { Cart } from './pages/Cart'
 import store from './store'
 
-
 class App extends Component {
   render() {
     return (
-       <Provider store={store}>
-          <GlobalStyles />
-          <H1>Welcome to the Purple Brand Store</H1>
-          <Switch>
-            <Route path="/" exact component={ProductList} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/:productID" component={ProductDetail} />
-          </Switch>
+      <Provider store={store}>
+        <GlobalStyles />
+        <H1>Welcome to the Purple Brand Store</H1>
+        <Switch>
+          <Route path="/" exact component={ProductList} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/:productID" component={ProductDetail} />
+        </Switch>
       </Provider>
     )
   }

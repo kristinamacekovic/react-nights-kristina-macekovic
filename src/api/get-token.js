@@ -12,5 +12,5 @@ export const getToken = () =>
       scope: config.scope,
     }),
   })
-  .then(res => res.json())
-  .then(res => res.access_token)
+    .then(res => res.json())
+    .then(res => res.access_token)

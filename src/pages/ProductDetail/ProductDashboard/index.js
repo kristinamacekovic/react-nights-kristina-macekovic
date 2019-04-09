@@ -12,20 +12,20 @@ import {
   Positive,
   Negative,
   AddButton,
-  Link
+  Link,
 } from './styled'
 
 class ProductDashboard extends Component {
   state = {
     attributes: {
-      inventory: {}
-    }
+      inventory: {},
+    },
   }
 
   async componentDidMount() {
     const productData = await getProductDetail(this.props.id)
     const attributes = productData.data.attributes
-    this.setState({attributes})
+    this.setState({ attributes })
   }
 
   render() {
@@ -55,7 +55,13 @@ class ProductDashboard extends Component {
           <Accent>Description:</Accent> {this.state.attributes.description}
         </Description>
         <Description>
-        {this.state.attributes.inventory.available ? <Positive>In Stock: {this.state.attributes.inventory.quantity}</Positive> : <Negative>Not In Stock</Negative>}
+          {this.state.attributes.inventory.available ? (
+            <Positive>
+              In Stock: {this.state.attributes.inventory.quantity}
+            </Positive>
+          ) : (
+            <Negative>Not In Stock</Negative>
+          )}
         </Description>
         <AddButton onClick={evt => this.props.onAddToCart(this.props.id, evt)}>
           Add to Cart

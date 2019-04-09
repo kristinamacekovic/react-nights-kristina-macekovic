@@ -7,7 +7,6 @@ import { removeProduct } from '../../store/cartItems/actions'
 import CartItem from './CartItem'
 
 class CartView extends Component {
-
   handleRemoveFromCart = (productId, evt) => {
     evt.preventDefault()
     this.props.removeProduct(productId)
@@ -22,7 +21,8 @@ class CartView extends Component {
             <li key={item.product.id}>
               <CartItem
                 node={item}
-                onRemoveFromCart={this.handleRemoveFromCart} />
+                onRemoveFromCart={this.handleRemoveFromCart}
+              />
             </li>
           ))}
         </ul>
@@ -42,6 +42,9 @@ const mapDispatchToProps = {
   removeProduct,
 }
 
-const Cart = connect(mapStateToProps, mapDispatchToProps)(CartView)
+const Cart = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartView)
 
 export { Cart }

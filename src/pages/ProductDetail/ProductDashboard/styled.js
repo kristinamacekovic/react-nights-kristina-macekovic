@@ -31,7 +31,7 @@ export const Negative = styled.span`
 `
 
 export const ProductDetailImgWrap = styled.div`
-  height:30rem;
+  height: 30rem;
   height: 30rem;
   margin: auto;
 `

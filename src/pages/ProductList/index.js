@@ -15,7 +15,6 @@ class Products extends Component {
   }
 
   async componentDidMount() {
-
     const products = await getSKUs()
     this.props.loadProducts(products)
 
@@ -32,7 +31,9 @@ class Products extends Component {
   render() {
     return (
       <Layout>
-        {!this.props.products ? <Loader /> :
+        {!this.props.products ? (
+          <Loader />
+        ) : (
           <ProductsWrap>
             {this.props.products.map(product => (
               <Product
@@ -42,7 +43,7 @@ class Products extends Component {
               />
             ))}
           </ProductsWrap>
-        }
+        )}
       </Layout>
     )
   }
