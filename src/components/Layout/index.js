@@ -23,6 +23,7 @@ class Layout extends Component {
           <StyledLink to="/">All Products</StyledLink>
           <StyledLink to="/cart">My Cart</StyledLink>
           <StyledLink to="/signup">Sign Up</StyledLink>
+          <StyledLink to="/login">Login</StyledLink>
         </Header>
         <Wrapper>{this.props.children}</Wrapper>
       </Fragment>
