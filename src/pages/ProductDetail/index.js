@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { ProductDashboard } from './ProductDashboard'
 import { addProduct } from '../../store/cartItems/actions'
+import Layout from '../../components/Layout'
 
 class ProductDetailPage extends Component {
   handleAddToCart = (productId, evt) => {
@@ -13,7 +14,11 @@ class ProductDetailPage extends Component {
   render() {
     const { match } = this.props
     const id = match.params.productID
-    return <ProductDashboard id={id} onAddToCart={this.handleAddToCart} />
+    return (
+      <Layout>
+        <ProductDashboard id={id} onAddToCart={this.handleAddToCart} />
+      </Layout>
+    )
   }
 }
 

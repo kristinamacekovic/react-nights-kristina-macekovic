@@ -7,6 +7,7 @@ import { H1 } from './components/Typography'
 import { ProductList } from './pages/ProductList'
 import { ProductDetail } from './pages/ProductDetail'
 import { Cart } from './pages/Cart'
+import { SignUp } from './pages/SignUp'
 import store from './store'
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={ProductList} />
           <Route path="/cart" component={Cart} />
+          <Route path="/signup" component={SignUp} />
           <Route path="/:productID" component={ProductDetail} />
         </Switch>
       </Provider>

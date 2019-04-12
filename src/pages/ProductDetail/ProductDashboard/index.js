@@ -12,7 +12,6 @@ import {
   Positive,
   Negative,
   AddButton,
-  Link,
 } from './styled'
 
 class ProductDashboard extends Component {
@@ -31,8 +30,6 @@ class ProductDashboard extends Component {
   render() {
     return (
       <ProductDetailWrapper>
-        <Link to="/">Home</Link>
-        <Link to="/cart">Go to Cart</Link>
         <ProductDetailImgWrap>
           <ProductDetailImg
             src={this.state.attributes.image_url}
