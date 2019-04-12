@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
-import presets from '../../../../global/presets'
+import { Link as BaseLink } from 'react-router-dom'
+import presets from '../../../global/presets'
 
 export const ProductDetailWrapper = styled.article`
   width: 50rem;
@@ -30,7 +31,7 @@ export const Negative = styled.span`
 `
 
 export const ProductDetailImgWrap = styled.div`
-  height:30rem;
+  height: 30rem;
   height: 30rem;
   margin: auto;
 `
@@ -53,4 +54,24 @@ export const ProductDetailTitle = styled.h3`
   text-transform: uppercase;
   margin: auto;
   color: ${presets.color.purple};
+`
+
+export const AddButton = styled.button`
+  background: ${presets.color.teal};
+  padding: 1rem;
+  margin-top: 0.5rem;
+  width: 20rem;
+  border: none;
+  border-radius: ${presets.radius.basic};
+  color: ${presets.color.white};
+  margin: 2rem auto;
+`
+
+export const Link = styled(BaseLink)`
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  width: 20rem;
+  margin: 2rem auto;
+  display: inline;
 `

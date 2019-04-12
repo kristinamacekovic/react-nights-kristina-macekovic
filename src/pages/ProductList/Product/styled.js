@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 import { Link as BaseLink } from 'react-router-dom'
-import presets from '../../../../../global/presets'
+import presets from '../../../global/presets'
 
 export const Wrapper = styled.li``
 
@@ -50,4 +50,13 @@ export const Title = styled.h3`
   font-weight: 100;
   text-transform: uppercase;
   color: ${presets.color.purple};
+`
+
+export const AddButton = styled.button`
+  background: ${presets.color.teal};
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: ${presets.radius.basic};
+  color: ${presets.color.white};
 `

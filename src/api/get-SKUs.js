@@ -26,7 +26,7 @@ export const getSKUs = async () => {
     return {
       ...product.attributes,
       id: product.id,
-      price: prices ? prices.attributes : null
+      price: prices ? prices.attributes : null,
     }
   })
 }

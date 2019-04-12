@@ -1,17 +1,29 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { ProductDashboard } from './components/ProductDashboard'
+import { ProductDashboard } from './ProductDashboard'
+import { addProduct } from '../../store/cartItems/actions'
 
-class ProductDetail extends Component {
-   render() {
+class ProductDetailPage extends Component {
+  handleAddToCart = (productId, evt) => {
+    evt.preventDefault()
+    this.props.addProduct(productId)
+  }
+
+  render() {
     const { match } = this.props
     const id = match.params.productID
-    return (
-      <div>
-        <ProductDashboard id={id}/>
-      </div>
-    )
+    return <ProductDashboard id={id} onAddToCart={this.handleAddToCart} />
   }
 }
+
+const mapDispatchToProps = {
+  addProduct,
+}
+
+const ProductDetail = connect(
+  null,
+  mapDispatchToProps
+)(ProductDetailPage)
 
 export { ProductDetail }

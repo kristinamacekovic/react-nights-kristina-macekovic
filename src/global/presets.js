@@ -13,7 +13,7 @@ const presets = {
     teal: '#00C9A7',
     darkPurple: '#4B4453',
     mediumPurple: '#9B89B3',
-    pink: '#D65DB1'
+    pink: '#D65DB1',
   },
   radius: {
     basic: '5px',
@@ -33,8 +33,8 @@ const presets = {
   },
   space: ['0rem', '2rem', '4rem', '8rem', '16rem', '32rem'],
   border: {
-    basic: '2px solid black'
-  }
+    basic: '2px solid black',
+  },
 }
 
 export default presets
