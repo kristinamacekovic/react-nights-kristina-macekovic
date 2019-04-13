@@ -1,15 +1,17 @@
-import config from '../config'
-import { getToken } from './get-token'
+// import config from '../config'
+// import { getGuestToken } from './get-guest-token'
+import { api } from './api-client'
+import { formatProduct } from './utils/format-product'
 
-export const getSKUs = async () => {
-  const token = await getToken()
+/* export const getSKUs = async () => {
+const token = await getGuestToken()
 
   const res = await fetch(`${config.apiUrl}/api/skus?include=prices`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   })
 
   if (!res.ok) {
@@ -26,7 +28,12 @@ export const getSKUs = async () => {
     return {
       ...product.attributes,
       id: product.id,
-      price: prices ? prices.attributes : null,
+      price: prices ? prices.attributes : null
     }
   })
+} */
+export const getSKUs = async () => {
+  const { data, included } = await api('/api/skus?include=prices')
+
+  return data.map(product => formatProduct(product, included))
 }

@@ -11,15 +11,15 @@ import { ProductsWrap } from './styled'
 
 class Products extends Component {
   state = {
-    isLoading: true,
+    isLoading: true
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     const products = await getSKUs()
     this.props.loadProducts(products)
 
     this.setState({
-      isLoading: false,
+      isLoading: false
     })
   }
 
@@ -28,7 +28,7 @@ class Products extends Component {
     this.props.addProduct(productId)
   }
 
-  render() {
+  render () {
     return (
       <Layout>
         {!this.props.products ? (
@@ -50,12 +50,12 @@ class Products extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products,
+  products: state.products
 })
 
 const mapDispatchToProps = {
   loadProducts,
-  addProduct,
+  addProduct
 }
 
 const ProductList = connect(

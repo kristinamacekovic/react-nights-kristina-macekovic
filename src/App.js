@@ -12,17 +12,17 @@ import { Login } from './pages/Login'
 import store from './store'
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
         <GlobalStyles />
         <H1>Welcome to the Purple Brand Store</H1>
         <Switch>
-          <Route path="/" exact component={ProductList} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={Login} />
-          <Route path="/:productID" component={ProductDetail} />
+          <Route path='/' exact component={ProductList} />
+          <Route path='/cart' component={Cart} />
+          <Route path='/signup' component={SignUp} />
+          <Route path='/login' component={Login} />
+          <Route path='/:productID' component={ProductDetail} />
         </Switch>
       </Provider>
     )

@@ -11,23 +11,22 @@ import {
   Accent,
   Positive,
   Negative,
-  AddButton,
+  AddButton
 } from './styled'
 
 class ProductDashboard extends Component {
   state = {
     attributes: {
-      inventory: {},
-    },
+      inventory: {}
+    }
   }
-
-  async componentDidMount() {
+  async componentDidMount () {
     const productData = await getProductDetail(this.props.id)
-    const attributes = productData.data.attributes
+    const attributes = productData.attributes
     this.setState({ attributes })
   }
 
-  render() {
+  render () {
     return (
       <ProductDetailWrapper>
         <ProductDetailImgWrap>

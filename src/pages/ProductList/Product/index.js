@@ -7,7 +7,7 @@ import {
   Title,
   Price,
   Link,
-  AddButton,
+  AddButton
 } from './styled'
 
 const Product = ({ node, onAddToCart }) => (
