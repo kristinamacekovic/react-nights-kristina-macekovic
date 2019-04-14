@@ -11,7 +11,7 @@ class ProductDetailPage extends Component {
     this.props.addProduct(productId)
   }
 
-  render () {
+  render() {
     const { match } = this.props
     const id = match.params.productID
     return (
@@ -23,7 +23,7 @@ class ProductDetailPage extends Component {
 }
 
 const mapDispatchToProps = {
-  addProduct
+  addProduct,
 }
 
 const ProductDetail = connect(

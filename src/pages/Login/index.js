@@ -1,37 +1,55 @@
 import React, { Component } from 'react'
 import { Formik } from 'formik'
+import { connect } from 'react-redux'
 
 import Layout from '../../components/Layout'
 import { H1 } from '../../components/Typography'
-import { Form } from '../../components/Form'
+import { Form, GlobalFormError } from '../../components/Form'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
-import { schema } from './schema'
+import { verifyCustomer } from '../../api/customers/verify-customer'
+import { loginUser } from '../../store/user/actions'
 
-class Login extends Component {
+class LoginPage extends Component {
+  state = {
+    globalError: '',
+  }
+
   initialValues = {
     email: '',
     password: '',
   }
 
-  handleSubmit = () => {
-    console.log('Success!')
+  handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true)
+      const customerInfo = await verifyCustomer(values)
+      this.props.loginUser(customerInfo)
+      this.props.history.push('/account')
+    } catch (error) {
+      this.setState({
+        globalError: error.message,
+      })
+    }
+    setSubmitting(false)
   }
 
   render() {
+    const { globalError } = this.state
     return (
       <Layout>
         <H1>Login</H1>
-        <Formik
-          initialValues={this.initialValues}
-          validationSchema={schema}
-          onSubmit={this.handleSubmit}
-        >
-          {({ handleSubmit }) => (
+        <Formik initialValues={this.initialValues} onSubmit={this.handleSubmit}>
+          {({ handleSubmit, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>
+              {Boolean(globalError) && (
+                <GlobalFormError>{globalError}</GlobalFormError>
+              )}
               <Input name="email" label="Email" type="email" />
               <Input name="password" label="Password" type="password" />
-              <Button>Login</Button>
+              <Button disabled={isSubmitting}>
+                {isSubmitting ? 'Logging In...' : 'Login'}
+              </Button>
             </Form>
           )}
         </Formik>
@@ -39,5 +57,14 @@ class Login extends Component {
     )
   }
 }
+
+const mapDispatchToProps = {
+  loginUser,
+}
+
+const Login = connect(
+  null,
+  mapDispatchToProps
+)(LoginPage)
 
 export { Login }

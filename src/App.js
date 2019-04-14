@@ -9,20 +9,25 @@ import { ProductDetail } from './pages/ProductDetail'
 import { Cart } from './pages/Cart'
 import { SignUp } from './pages/SignUp'
 import { Login } from './pages/Login'
+import { Logout } from './pages/Logout'
+import { Account } from './pages/Account'
 import store from './store'
+import { PrivateRoute } from './components/PrivateRoute'
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <GlobalStyles />
         <H1>Welcome to the Purple Brand Store</H1>
         <Switch>
-          <Route path='/' exact component={ProductList} />
-          <Route path='/cart' component={Cart} />
-          <Route path='/signup' component={SignUp} />
-          <Route path='/login' component={Login} />
-          <Route path='/:productID' component={ProductDetail} />
+          <Route path="/" exact component={ProductList} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/account" component={Account} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/:productID" component={ProductDetail} />
         </Switch>
       </Provider>
     )
