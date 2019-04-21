@@ -30,7 +30,4 @@ const mapStateToProps = state => ({
   isAuth: Boolean(state.customer),
 })
 
-export const PrivateRoute = connect(
-  mapStateToProps,
-  null
-)(PrivateRouteComponent)
+export const PrivateRoute = connect(mapStateToProps)(PrivateRouteComponent)

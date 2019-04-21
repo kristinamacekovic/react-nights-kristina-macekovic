@@ -20,7 +20,14 @@ export const createCustomer = async ({ email, password, firstName }) => {
     body: JSON.stringify(requestBody),
   })
 
-  if (!response.errors) {
+  if (response.errors) {
+    const firstError = response.errors[0]
+    if (firstError.status === '422') {
+      throw new Error('Email is already registered')
+    } else {
+      throw new Error('Unexpected error')
+    }
+  } else {
     const {
       data: { attributes },
     } = response
@@ -31,13 +38,6 @@ export const createCustomer = async ({ email, password, firstName }) => {
       ownerId,
       email: attributes.email,
       firstName: attributes.metadata.firstName,
-    }
-  } else {
-    const firstError = response.errors[0]
-    if (firstError.status === '422') {
-      throw new Error('Email is already registered')
-    } else {
-      throw new Error('Unexpected error')
     }
   }
 }

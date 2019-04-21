@@ -3,24 +3,17 @@ import config from '../../config'
 import { setToken } from '../../utils/utils'
 
 export const verifyCustomer = async ({ email, password }) => {
-  // get the list of customers
   const response = await api('/oauth/token', {
     method: 'POST',
     body: JSON.stringify({
       grant_type: 'password',
       username: email,
       password: password,
-      client_id: config.clientId
-    })
+      client_id: config.clientId,
+    }),
   })
 
-  if (!response.errors) {
-    setToken(response.access_token)
-    return {
-      email: email,
-      isAuth: true
-    }
-  } else {
+  if (response.errors) {
     const firstError = response.errors[0]
     switch (firstError.status) {
       case '422':
@@ -29,6 +22,11 @@ export const verifyCustomer = async ({ email, password }) => {
         throw new Error('Token expired')
       default:
         throw new Error('Unexpected error')
+    }
+  } else {
+    setToken(response.access_token)
+    return {
+      email: email,
     }
   }
 }
