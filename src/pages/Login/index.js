@@ -7,8 +7,10 @@ import { H1 } from '../../components/Typography'
 import { Form, GlobalFormError } from '../../components/Form'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
-import { verifyCustomer } from '../../api/customers/verify-customer'
 import { loginUser } from '../../store/user/actions'
+import { getCustomer } from '../../utils/utils'
+import { getCustomerToken } from '../../api/customers/get-customer-token'
+import { schema } from './schema'
 
 class LoginPage extends Component {
   state = {
@@ -23,7 +25,11 @@ class LoginPage extends Component {
   handleSubmit = async (values, { setSubmitting }) => {
     try {
       setSubmitting(true)
-      const customerInfo = await verifyCustomer(values)
+      const { ownerId } = await getCustomerToken({
+        username: values.email,
+        password: values.password,
+      })
+      const customerInfo = await getCustomer(ownerId)
       this.props.loginUser(customerInfo)
       this.props.history.push('/account')
     } catch (error) {
@@ -39,7 +45,11 @@ class LoginPage extends Component {
     return (
       <Layout>
         <H1>Login</H1>
-        <Formik initialValues={this.initialValues} onSubmit={this.handleSubmit}>
+        <Formik
+          initialValues={this.initialValues}
+          validationSchema={schema}
+          onSubmit={this.handleSubmit}
+        >
           {({ handleSubmit, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>
               {Boolean(globalError) && (

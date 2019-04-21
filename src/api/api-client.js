@@ -3,10 +3,8 @@ import { getGuestToken } from '../api/get-guest-token'
 import { getToken } from '../utils/utils'
 
 export const api = async (url, options) => {
-  // get the current token
   let token = getToken()
 
-  // check if the token exists; if not get one
   if (!token) {
     token = await getGuestToken()
   }
@@ -15,9 +13,9 @@ export const api = async (url, options) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/vnd.api+json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    ...options
+    ...options,
   })
 
   return response.json()

@@ -3,6 +3,11 @@ import { formatProduct } from './utils/format-product'
 
 export const getSKUs = async () => {
   const { data, included } = await api('/api/skus?include=prices')
-
-  return data.map(product => formatProduct(product, included))
+  try {
+    return {
+      data: data.map(product => formatProduct(product, included)),
+    }
+  } catch (error) {
+    throw new Error('could not fetch products')
+  }
 }

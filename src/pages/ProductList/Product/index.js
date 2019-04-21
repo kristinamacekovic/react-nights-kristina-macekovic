@@ -7,7 +7,7 @@ import {
   Title,
   Price,
   Link,
-  AddButton
+  AddButton,
 } from './styled'
 
 const Product = ({ node, onAddToCart }) => (
@@ -20,7 +20,12 @@ const Product = ({ node, onAddToCart }) => (
         <Title>{node.name}</Title>
       </TitleWrap>
       <Price>{node.price.formatted_amount}</Price>
-      <AddButton onClick={evt => onAddToCart(node.id, evt)}>
+      <AddButton
+        onClick={evt => {
+          evt.preventDefault()
+          onAddToCart(node.id)
+        }}
+      >
         Add to Cart
       </AddButton>
     </Link>

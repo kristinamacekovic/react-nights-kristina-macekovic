@@ -10,15 +10,15 @@ export const verifyCustomer = async ({ email, password }) => {
       grant_type: 'password',
       username: email,
       password: password,
-      client_id: config.clientId,
-    }),
+      client_id: config.clientId
+    })
   })
 
   if (!response.errors) {
     setToken(response.access_token)
     return {
       email: email,
-      isAuth: true,
+      isAuth: true
     }
   } else {
     const firstError = response.errors[0]

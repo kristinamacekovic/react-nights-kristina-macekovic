@@ -8,6 +8,7 @@ import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { schema } from './schema'
 import { createCustomer } from '../../api/customers/create-customer'
+import { getCustomer } from '../../api/customers/get-customer'
 
 class SignUp extends Component {
   state = {
@@ -23,7 +24,9 @@ class SignUp extends Component {
   handleSubmit = async (values, { setSubmitting }) => {
     try {
       setSubmitting(true)
-      await createCustomer(values)
+      const { ownerId } = await createCustomer(values)
+      const customer = await getCustomer(ownerId)
+      this.props.loginUser(customer)
       this.props.history.push('/account')
     } catch (error) {
       this.setState({
@@ -38,11 +41,10 @@ class SignUp extends Component {
     return (
       <Layout>
         <H1>Sign Up</H1>
-        <Formik
+        <Formik>
           initialValues={this.initialValues}
           validationSchema={schema}
-          onSubmit={this.handleSubmit}
-        >
+          onSubmit={this.handleSubmit}>
           {({ handleSubmit, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>
               {Boolean(globalError) && (

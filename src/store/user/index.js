@@ -1,21 +1,11 @@
-import { LOGIN_USER } from './actions'
-import { LOGOUT_USER } from './actions'
+import { LOGIN_USER, LOGOUT_USER } from './actions'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return {
-        ...state,
-        [action.payload.isAuth]: true,
-      }
-    case LOGOUT_USER: {
-      const newState = {
-        ...state,
-        [action.payload.isAuth]: false,
-      }
-      localStorage.clear()
-      return newState
-    }
+      return action.payload.user
+    case LOGOUT_USER:
+      return {}
     default:
       return state
   }

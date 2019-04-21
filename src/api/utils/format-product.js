@@ -5,6 +5,6 @@ export const formatProduct = (product, included) => {
   return {
     id: product.id,
     ...product.attributes,
-    price: prices ? prices.attributes : null
+    price: prices ? prices.attributes : null,
   }
 }
