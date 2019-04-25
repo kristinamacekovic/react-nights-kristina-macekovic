@@ -41,10 +41,11 @@ class SignUp extends Component {
     return (
       <Layout>
         <H1>Sign Up</H1>
-        <Formik>
+        <Formik
           initialValues={this.initialValues}
           validationSchema={schema}
-          onSubmit={this.handleSubmit}>
+          onSubmit={this.handleSubmit}
+        >
           {({ handleSubmit, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>
               {Boolean(globalError) && (

@@ -72,9 +72,7 @@ const mapDispatchToProps = {
   loginUser,
 }
 
-const Login = connect(
+export const Login = connect(
   null,
   mapDispatchToProps
 )(LoginPage)
-
-export { Login }

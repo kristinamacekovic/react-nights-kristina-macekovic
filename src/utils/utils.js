@@ -22,3 +22,15 @@ export const setCustomer = customer => {
 export const removeCustomer = () => {
   return window.localStorage.removeItem('customer')
 }
+
+export const getRefreshToken = () => {
+  return window.localStorage.getItem('refreshtoken')
+}
+
+export const setRefreshToken = refreshToken => {
+  window.localStorage.setItem('refreshtoken', refreshToken)
+}
+
+export const removeRefreshToken = () => {
+  window.localStorage.removeItem('refreshtoken')
+}
