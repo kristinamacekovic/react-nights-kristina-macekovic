@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom'
 
 import { logoutUser } from '../../store/user/actions'
 import { Wrapper, Header, StyledLink } from './styled'
-import { removeToken } from '../../utils/utils'
-import { removeCustomer } from '../../utils/utils'
+import { removeToken } from '../../utils/token'
+import { removeCustomer } from '../../utils/customer'
 
 class Layout extends Component {
   handleLogout = () => {
@@ -24,7 +24,7 @@ class Layout extends Component {
           {isAuth ? (
             <>
               <StyledLink to="/account">My Profile</StyledLink>
-              <StyledLink to="/logout" onLogout={this.handleLogout}>
+              <StyledLink as="button" to="/logout" onClick={this.handleLogout}>
                 Logout
               </StyledLink>
             </>

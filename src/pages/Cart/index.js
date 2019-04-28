@@ -12,7 +12,7 @@ class CartView extends Component {
     this.props.removeProduct(productId)
   }
 
-  render() {
+  render () {
     return (
       <Layout>
         <H1>My cart</H1>
@@ -34,12 +34,12 @@ class CartView extends Component {
 const mapStateToProps = state => ({
   items: Object.keys(state.cartItems).map(productId => ({
     quantity: state.cartItems[productId],
-    product: state.products.find(p => p.id === productId),
-  })),
+    product: state.products.find(p => p.id === productId)
+  }))
 })
 
 const mapDispatchToProps = {
-  removeProduct,
+  removeProduct
 }
 
 const Cart = connect(

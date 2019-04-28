@@ -9,15 +9,15 @@ export const createCustomer = async ({ email, password, firstName }) => {
         email,
         password,
         metadata: {
-          firstName,
-        },
-      },
-    },
+          firstName
+        }
+      }
+    }
   }
 
   const response = await api('/api/customers', {
     method: 'POST',
-    body: JSON.stringify(requestBody),
+    body: JSON.stringify(requestBody)
   })
 
   if (response.errors) {
@@ -29,7 +29,7 @@ export const createCustomer = async ({ email, password, firstName }) => {
     }
   } else {
     const {
-      data: { attributes },
+      data: { attributes }
     } = response
 
     const { ownerId } = getCustomerToken({ username: email, password })
@@ -37,7 +37,7 @@ export const createCustomer = async ({ email, password, firstName }) => {
     return {
       ownerId,
       email: attributes.email,
-      firstName: attributes.metadata.firstName,
+      firstName: attributes.metadata.firstName
     }
   }
 }

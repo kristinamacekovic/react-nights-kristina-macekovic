@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Formik } from 'formik'
+import { connect } from 'react-redux'
 
 import Layout from '../../components/Layout'
 import { H1 } from '../../components/Typography'
@@ -9,16 +10,17 @@ import { Button } from '../../components/Button'
 import { schema } from './schema'
 import { createCustomer } from '../../api/customers/create-customer'
 import { getCustomer } from '../../api/customers/get-customer'
+import { loginUser } from '../../store/user/actions'
 
-class SignUp extends Component {
+class SignUpPage extends Component {
   state = {
-    globalError: '',
+    globalError: ''
   }
   initialValues = {
     firstName: '',
     email: '',
     password: '',
-    passwordConfirm: '',
+    passwordConfirm: ''
   }
 
   handleSubmit = async (values, { setSubmitting }) => {
@@ -30,13 +32,13 @@ class SignUp extends Component {
       this.props.history.push('/account')
     } catch (error) {
       this.setState({
-        globalError: error.message,
+        globalError: error.message
       })
     }
     setSubmitting(false)
   }
 
-  render() {
+  render () {
     const { globalError } = this.state
     return (
       <Layout>
@@ -51,13 +53,13 @@ class SignUp extends Component {
               {Boolean(globalError) && (
                 <GlobalFormError>{globalError}</GlobalFormError>
               )}
-              <Input name="firstName" label="First name" />
-              <Input name="email" label="Email" type="email" />
-              <Input name="password" label="Password" type="password" />
+              <Input name='firstName' label='First name' />
+              <Input name='email' label='Email' type='email' />
+              <Input name='password' label='Password' type='password' />
               <Input
-                name="passwordConfirm"
-                label="Confirm password"
-                type="password"
+                name='passwordConfirm'
+                label='Confirm password'
+                type='password'
               />
               <Button disabled={isSubmitting}>
                 {isSubmitting ? 'Signing Up...' : 'Sign Up'}
@@ -70,4 +72,11 @@ class SignUp extends Component {
   }
 }
 
-export { SignUp }
+const mapDispatchToProps = {
+  loginUser
+}
+
+export const SignUp = connect(
+  null,
+  mapDispatchToProps
+)(SignUpPage)

@@ -3,9 +3,9 @@ export const LOGOUT_USER = 'user/LOGOUT'
 
 export const loginUser = user => ({
   type: LOGIN_USER,
-  payload: { user },
+  payload: { user }
 })
 
 export const logoutUser = () => ({
-  type: LOGOUT_USER,
+  type: LOGOUT_USER
 })

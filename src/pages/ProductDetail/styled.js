@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 import { Link as BaseLink } from 'react-router-dom'
-import presets from '../../../global/presets'
+import presets from '../../global/presets'
 
 export const ProductDetailWrapper = styled.article`
   width: 50rem;

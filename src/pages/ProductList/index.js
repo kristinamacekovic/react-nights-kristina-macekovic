@@ -2,25 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Layout from '../../components/Layout'
-import Loader from '../../components/Loader'
-import { getSKUs } from '../../api/get-SKUs'
+import { Loader } from '../../components/Loader'
+import { getSKUs } from '../../api/products/get-SKUs'
 import { addProduct } from '../../store/cartItems/actions'
 import { loadProducts } from '../../store/products/actions'
 import Product from './Product'
 import { ProductsWrap } from './styled'
 
 class Products extends Component {
-  state = {
-    isLoading: true,
-  }
-
   async componentDidMount() {
     const products = await getSKUs()
     this.props.loadProducts(products)
-
-    this.setState({
-      isLoading: false,
-    })
   }
 
   handleAddToCart = productId => {

@@ -13,7 +13,7 @@ import { Logout } from './pages/Logout'
 import { Account } from './pages/Account'
 import { PrivateRoute } from './components/PrivateRoute'
 import { configureStore } from './store'
-import { getCustomer } from './utils/utils'
+import { getCustomer } from './utils/customer'
 
 const store = configureStore({ customer: getCustomer() })
 
@@ -30,7 +30,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <PrivateRoute path="/account" component={Account} />
           <Route path="/logout" component={Logout} />
-          <Route path="/:productID" component={ProductDetail} />
+          <Route path="/:productId" component={ProductDetail} />
         </Switch>
       </Provider>
     )
