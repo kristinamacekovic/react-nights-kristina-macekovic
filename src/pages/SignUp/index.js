@@ -7,20 +7,22 @@ import { H1 } from '../../components/Typography'
 import { Form, GlobalFormError } from '../../components/Form'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
-import { schema } from './schema'
+import { login } from '../../store/customer/actions'
 import { createCustomer } from '../../api/customers/create-customer'
 import { getCustomer } from '../../api/customers/get-customer'
-import { loginUser } from '../../store/user/actions'
+import { schema } from './schema'
+import * as routes from '../../routes'
 
 class SignUpPage extends Component {
   state = {
-    globalError: ''
+    globalError: '',
   }
+
   initialValues = {
     firstName: '',
     email: '',
     password: '',
-    passwordConfirm: ''
+    passwordConfirm: '',
   }
 
   handleSubmit = async (values, { setSubmitting }) => {
@@ -28,21 +30,22 @@ class SignUpPage extends Component {
       setSubmitting(true)
       const { ownerId } = await createCustomer(values)
       const customer = await getCustomer(ownerId)
-      this.props.loginUser(customer)
-      this.props.history.push('/account')
+      this.props.login(customer)
+      this.props.history.push(routes.ACCOUNT)
     } catch (error) {
       this.setState({
-        globalError: error.message
+        globalError: error.message,
       })
     }
     setSubmitting(false)
   }
 
-  render () {
+  render() {
     const { globalError } = this.state
+
     return (
       <Layout>
-        <H1>Sign Up</H1>
+        <H1 textAlign="center">Sign Up</H1>
         <Formik
           initialValues={this.initialValues}
           validationSchema={schema}
@@ -53,13 +56,13 @@ class SignUpPage extends Component {
               {Boolean(globalError) && (
                 <GlobalFormError>{globalError}</GlobalFormError>
               )}
-              <Input name='firstName' label='First name' />
-              <Input name='email' label='Email' type='email' />
-              <Input name='password' label='Password' type='password' />
+              <Input name="firstName" label="First name" />
+              <Input name="email" type="email" label="Email address" />
+              <Input name="password" type="password" label="Password" />
               <Input
-                name='passwordConfirm'
-                label='Confirm password'
-                type='password'
+                name="passwordConfirm"
+                type="password"
+                label="Confirm password"
               />
               <Button disabled={isSubmitting}>
                 {isSubmitting ? 'Signing Up...' : 'Sign Up'}
@@ -73,7 +76,7 @@ class SignUpPage extends Component {
 }
 
 const mapDispatchToProps = {
-  loginUser
+  login,
 }
 
 export const SignUp = connect(

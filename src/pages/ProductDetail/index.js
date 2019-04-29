@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import { useApi } from '../../api/use-api'
 import { addProduct } from '../../store/cartItems/actions'
-import { loadProduct } from '../../store/products/actions'
 import { getProductDetail } from '../../api/products/getProductDetail'
 import Layout from '../../components/Layout'
 import { Loader } from '../../components/Loader'
@@ -16,78 +17,60 @@ import {
   Accent,
   AddButton,
 } from './styled'
+import * as routes from '../../routes'
 
-class ProductDetailPage extends Component {
-  fetchProduct = async productId => {
-    const product = await getProductDetail(productId)
-    this.props.loadProduct(product)
-  }
+const ProductView = ({ match, addProduct }) => {
+  const { productId } = match.params
 
-  componentDidMount() {
-    const { productId } = this.props.match.params
-    this.fetchProduct(productId)
-  }
-
-  componentDidUpdate(prevProps) {
-    const { productId } = this.props.match.params
-    if (prevProps.match.params.productId !== productId) {
-      this.fetchProduct(productId)
-    }
-  }
-
-  render() {
-    const { product } = this.props
-    return (
-      <Layout>
-        {product ? (
-          <>
-            <ProductDetailWrapper>
-              <ProductDetailImgWrap>
-                <ProductDetailImg
-                  src={product.image_url}
-                  alt={`${product.name} image`}
-                />
-              </ProductDetailImgWrap>
-              <TitleWrap>
-                <ProductDetailTitle>{product.name}</ProductDetailTitle>
-              </TitleWrap>
-              <Description>
-                <Accent>Last Updated:</Accent> {product.updated_at}
-              </Description>
-              <Description>
-                <Accent>Reference:</Accent> {product.reference}
-              </Description>
-              <Description>
-                <Accent>Description:</Accent> {product.description}
-              </Description>
-              <Description>
-                <Accent>Price:</Accent> {product.price.formatted_amount}
-              </Description>
-              <AddButton onClick={() => this.props.addProduct(product.id)}>
-                Add to Cart
-              </AddButton>
-            </ProductDetailWrapper>
-          </>
-        ) : (
-          <Loader />
-        )}
-      </Layout>
-    )
-  }
+  const { data: product, isLoading } = useApi(
+    () => getProductDetail(productId),
+    [productId]
+  )
+  return (
+    <Layout>
+      {isLoading && <Loader />}
+      {product && (
+        <>
+          <ProductDetailWrapper>
+            <ProductDetailImgWrap>
+              <ProductDetailImg
+                src={product.image_url}
+                alt={`${product.name} image`}
+              />
+            </ProductDetailImgWrap>
+            <TitleWrap>
+              <ProductDetailTitle>{product.name}</ProductDetailTitle>
+            </TitleWrap>
+            <Description>
+              <Accent>Last Updated:</Accent> {product.updated_at}
+            </Description>
+            <Description>
+              <Accent>Reference:</Accent> {product.reference}
+            </Description>
+            <Description>
+              <Accent>Description:</Accent> {product.description}
+            </Description>
+            <Description>
+              <Accent>Price:</Accent> {product.price.formatted_amount}
+            </Description>
+            <AddButton onClick={() => addProduct(product.id)}>
+              Add to Cart
+            </AddButton>
+            <Link to={routes.PRODUCT_LIST}>Back</Link>
+          </ProductDetailWrapper>
+        </>
+      )}
+    </Layout>
+  )
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  product: state.products.find(
-    product => product.id === ownProps.match.params.productId
-  ),
-})
-
 const actionCreators = {
-  loadProduct,
   addProduct,
 }
 
-export const ProductDetail = connect(
-  mapStateToProps,
+const ProductDetail = connect(
+  null,
   actionCreators
-)(ProductDetailPage)
+)(ProductView)
+
+export { ProductDetail }

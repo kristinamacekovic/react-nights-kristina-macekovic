@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
   Wrapper,
   ImgWrap,
@@ -9,10 +10,11 @@ import {
   Link,
   AddButton,
 } from './styled'
+import * as routes from '../../../routes'
 
 const Product = ({ node, onAddToCart }) => (
   <Wrapper>
-    <Link to={node.id}>
+    <Link to={routes.getProductDetailRoute(node.id)}>
       <ImgWrap>
         <Img src={node.image_url} alt={`${node.name} image`} />
       </ImgWrap>

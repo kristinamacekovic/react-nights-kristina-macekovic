@@ -18,11 +18,11 @@ export const getCustomerToken = async ({ username, password }) => {
 
   switch (response.status) {
     case 200: {
-      const { owner_id, access_token, refresh_token } = await response.json()
+      const { owner_id, access_token } = await response.json()
 
       setToken(access_token)
 
-      return { ownerId: owner_id, access_token, refresh_token }
+      return { ownerId: owner_id, access_token }
     }
     case 401:
       throw new Error('Incorrect email or password')

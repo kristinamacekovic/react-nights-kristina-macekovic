@@ -1,56 +1,56 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
+import qs from 'qs'
 
 import Layout from '../../components/Layout'
 import { Loader } from '../../components/Loader'
 import { getSKUs } from '../../api/products/get-SKUs'
-import { addProduct } from '../../store/cartItems/actions'
-import { loadProducts } from '../../store/products/actions'
+import { useApi } from '../../api/use-api'
 import Product from './Product'
 import { ProductsWrap } from './styled'
+import { Pagination } from '../../components/Pagination'
+import { addProduct } from '../../store/cartItems/actions'
 
-class Products extends Component {
-  async componentDidMount() {
-    const products = await getSKUs()
-    this.props.loadProducts(products)
-  }
+const Products = ({ match, location, addProduct }) => {
+  const { page } = qs.parse(location.search.substr(1))
 
-  handleAddToCart = productId => {
-    this.props.addProduct(productId)
-  }
+  const { data: res, isLoading } = useApi(
+    () => getSKUs({ page: { number: page } }),
+    [page]
+  )
 
-  render() {
-    return (
-      <Layout>
-        {!this.props.products ? (
-          <Loader />
-        ) : (
+  const handleAddToCart = productId => addProduct(productId)
+
+  return (
+    <Layout>
+      {isLoading && <Loader />}
+      {res && (
+        <>
+          <Pagination
+            pages={res.meta.page_count}
+            activePage={match.params.page}
+          />
           <ProductsWrap>
-            {this.props.products.map(product => (
+            {res.data.map(product => (
               <Product
                 key={product.id}
                 node={product}
-                onAddToCart={this.handleAddToCart}
+                onAddToCart={handleAddToCart}
               />
             ))}
           </ProductsWrap>
-        )}
-      </Layout>
-    )
-  }
+        </>
+      )}
+    </Layout>
+  )
 }
 
-const mapStateToProps = state => ({
-  products: state.products,
-})
-
 const mapDispatchToProps = {
-  loadProducts,
   addProduct,
 }
 
 const ProductList = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Products)
 

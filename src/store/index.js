@@ -1,13 +1,11 @@
 import { createStore, combineReducers } from 'redux'
 
-import products from './products/index'
 import cartItems from './cartItems/index'
-import user from './user/index'
+import customer from './customer/index'
 
 const reducer = combineReducers({
-  products,
   cartItems,
-  user,
+  customer,
 })
 
 export const configureStore = (preloadedState = {}) =>

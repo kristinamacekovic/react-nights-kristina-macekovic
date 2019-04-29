@@ -2,6 +2,8 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import * as routes from '../../routes'
+
 const PrivateRouteComponent = ({ isAuth, component: Component, ...rest }) => {
   return (
     <Route
@@ -13,8 +15,8 @@ const PrivateRouteComponent = ({ isAuth, component: Component, ...rest }) => {
         return (
           <Redirect
             to={{
-              pathname: '/login',
-              state: { from: routeProps.location.pathname }
+              pathname: routes.LOGIN,
+              state: { from: routeProps.location.pathname },
             }}
           />
         )
@@ -24,7 +26,7 @@ const PrivateRouteComponent = ({ isAuth, component: Component, ...rest }) => {
 }
 
 const mapStateToProps = state => ({
-  isAuth: Boolean(state.customer)
+  isAuth: Object.keys(state.customer).length !== 0,
 })
 
 export const PrivateRoute = connect(mapStateToProps)(PrivateRouteComponent)

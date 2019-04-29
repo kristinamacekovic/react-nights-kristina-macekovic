@@ -1,10 +1,10 @@
-import { LOGIN_USER, LOGOUT_USER } from './actions'
+import { LOGIN, LOGOUT } from './actions'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case LOGIN_USER:
-      return action.payload.user
-    case LOGOUT_USER:
+    case LOGIN:
+      return action.payload.customer
+    case LOGOUT:
       return {}
     default:
       return state

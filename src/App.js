@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import React from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import GlobalStyles from './GlobalStyles'
@@ -9,32 +9,34 @@ import { ProductDetail } from './pages/ProductDetail'
 import { Cart } from './pages/Cart'
 import { SignUp } from './pages/SignUp'
 import { Login } from './pages/Login'
-import { Logout } from './pages/Logout'
 import { Account } from './pages/Account'
+import { NotFound } from './pages/NotFound'
 import { PrivateRoute } from './components/PrivateRoute'
 import { configureStore } from './store'
 import { getCustomer } from './utils/customer'
+import * as routes from './routes'
 
 const store = configureStore({ customer: getCustomer() })
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <GlobalStyles />
-        <H1>Welcome to the Purple Brand Store</H1>
-        <Switch>
-          <Route path="/" exact component={ProductList} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={Login} />
-          <PrivateRoute path="/account" component={Account} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/:productId" component={ProductDetail} />
-        </Switch>
-      </Provider>
-    )
-  }
-}
+const App = () => (
+  <Provider store={store}>
+    <GlobalStyles />
+    <H1>Welcome to the Purple Brand Store</H1>
+    <Switch>
+      <Route
+        path={routes.HOMEPAGE}
+        exact
+        render={() => <Redirect to={routes.PRODUCT_LIST} />}
+      />
+      <Route path={routes.PRODUCT_LIST} exact component={ProductList} />
+      <Route path={routes.PRODUCT_DETAIL} component={ProductDetail} />
+      <Route path={routes.CART} component={Cart} />
+      <Route path={routes.SIGN_UP} component={SignUp} />
+      <Route path={routes.LOGIN} component={Login} />
+      <PrivateRoute path={routes.ACCOUNT} component={Account} />
+      <Route component={NotFound} />
+    </Switch>
+  </Provider>
+)
 
-export default App
+export { App }
