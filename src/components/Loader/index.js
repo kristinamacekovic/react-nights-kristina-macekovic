@@ -4,14 +4,14 @@ import { LoaderWrap, StyledLoader, Circular, Path } from './styled'
 export const Loader = props => (
   <LoaderWrap {...props}>
     <StyledLoader>
-      <Circular viewBox='25 25 50 50'>
+      <Circular viewBox="25 25 50 50">
         <Path
-          cx='50'
-          cy='50'
-          r='20'
-          fill='none'
-          strokeMiterlimit='10'
-          strokeWidth='4'
+          cx="50"
+          cy="50"
+          r="20"
+          fill="none"
+          strokeMiterlimit="10"
+          strokeWidth="4"
           {...props}
         />
       </Circular>

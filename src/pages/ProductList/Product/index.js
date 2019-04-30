@@ -8,7 +8,7 @@ import {
   Title,
   Price,
   Link,
-  AddButton,
+  AddButton
 } from './styled'
 import * as routes from '../../../routes'
 
@@ -33,4 +33,4 @@ const Product = ({ node, onAddToCart }) => (
     </Link>
   </Wrapper>
 )
-export default Product
+export { Product }

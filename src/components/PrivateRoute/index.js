@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import isEmpty from 'ramda/src/isEmpty'
 
 import * as routes from '../../routes'
 
@@ -16,7 +17,7 @@ const PrivateRouteComponent = ({ isAuth, component: Component, ...rest }) => {
           <Redirect
             to={{
               pathname: routes.LOGIN,
-              state: { from: routeProps.location.pathname },
+              state: { from: routeProps.location.pathname }
             }}
           />
         )
@@ -26,7 +27,7 @@ const PrivateRouteComponent = ({ isAuth, component: Component, ...rest }) => {
 }
 
 const mapStateToProps = state => ({
-  isAuth: Object.keys(state.customer).length !== 0,
+  isAuth: !isEmpty(state.customer)
 })
 
 export const PrivateRoute = connect(mapStateToProps)(PrivateRouteComponent)
