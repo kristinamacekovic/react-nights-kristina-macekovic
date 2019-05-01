@@ -1,56 +1,32 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import * as routes from '../../routes'
 import { Wrapper, Header, StyledLink } from './styled'
-import { removeToken } from '../../utils/token'
-import { removeCustomer } from '../../utils/customer'
-import { logout } from '../../store/customer/actions'
 
-const Layout = ({ logout, isAuth, history, children }) => {
-  const handleLogout = () => {
-    logout()
-    removeToken()
-    removeCustomer()
-    history.push(routes.HOMEPAGE)
-  }
-
-  return (
-    <Fragment>
-      <Header>
-        <StyledLink to={routes.PRODUCT_LIST}>All Products</StyledLink>
-        <StyledLink to={routes.CART}>My Cart</StyledLink>
-        {isAuth ? (
-          <>
-            <StyledLink to={routes.ACCOUNT}>My Profile</StyledLink>
-            <StyledLink as='button' onClick={handleLogout}>
-              Logout
-            </StyledLink>
-          </>
-        ) : (
-          <>
-            <StyledLink to={routes.LOGIN}>Login</StyledLink>
-            <StyledLink to={routes.SIGN_UP}>Sign Up</StyledLink>
-          </>
-        )}
-      </Header>
-      <Wrapper>{children}</Wrapper>
-    </Fragment>
-  )
-}
+const Layout = ({ isAuth, children }) => (
+  <Fragment>
+    <Header>
+      <StyledLink to={routes.PRODUCT_LIST}>All Products</StyledLink>
+      <StyledLink to={routes.CART}>My Cart</StyledLink>
+      {isAuth ? (
+        <>
+          <StyledLink to={routes.ACCOUNT}>My Profile</StyledLink>
+          <StyledLink to={routes.LOGOUT}>Logout</StyledLink>
+        </>
+      ) : (
+        <>
+          <StyledLink to={routes.LOGIN}>Login</StyledLink>
+          <StyledLink to={routes.SIGN_UP}>Sign Up</StyledLink>
+        </>
+      )}
+    </Header>
+    <Wrapper>{children}</Wrapper>
+  </Fragment>
+)
 
 const mapStateToProps = state => ({
   isAuth: Object.keys(state.customer).length !== 0
 })
 
-const mapDispatchToProps = {
-  logout
-}
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Layout)
-)
+export default connect(mapStateToProps)(Layout)

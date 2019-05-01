@@ -5,10 +5,11 @@ export const getCustomer = () => {
   }
   return {}
 }
+
 export const setCustomer = customer => {
   window.localStorage.setItem('customer', JSON.stringify(customer))
 }
 
 export const removeCustomer = () => {
-  return window.localStorage.removeItem('customer')
+  window.localStorage.removeItem('customer')
 }

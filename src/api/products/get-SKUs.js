@@ -9,6 +9,6 @@ export const getSKUs = async query => {
 
   return {
     data: data.map(product => formatProduct(product, included)),
-    meta,
+    meta
   }
 }

@@ -23,7 +23,7 @@ const useApi = (fn, resolveCondition = []) => {
   return {
     request,
     data,
-    isLoading,
+    isLoading
   }
 }
 

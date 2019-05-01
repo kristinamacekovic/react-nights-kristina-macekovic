@@ -8,4 +8,5 @@ export const getProductDetailRoute = productId =>
 export const CART = '/cart'
 export const SIGN_UP = '/signup'
 export const LOGIN = '/login'
+export const LOGOUT = '/logout'
 export const ACCOUNT = '/account'

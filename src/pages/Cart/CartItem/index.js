@@ -1,11 +1,12 @@
-import React from 'react'
+import * as React from 'react'
 import flip from 'ramda/src/flip'
 import propOr from 'ramda/src/propOr'
 
-import { useApi } from '../../../api/use-api'
-import { RemoveButton } from './styled'
 import { getProductDetail } from '../../../api/products/getProductDetail'
+import { useApi } from '../../../api/use-api'
+
 import { Loader } from '../../../components/Loader'
+import { RemoveButton } from './styled'
 
 const getNameFallback = flip(propOr)('name')
 
@@ -23,7 +24,7 @@ const CartItem = ({ productId, quantity, removeProduct }) => {
       <p>
         {getName(product)} - {quantity}
       </p>
-      <RemoveButton onClick={() => removeProduct(productId)}>
+      <RemoveButton type='button' onClick={() => removeProduct(productId)}>
         Remove
       </RemoveButton>
     </li>

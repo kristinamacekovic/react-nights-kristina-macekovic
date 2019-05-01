@@ -3,7 +3,6 @@ import has from 'ramda/src/has'
 import evolve from 'ramda/src/evolve'
 import inc from 'ramda/src/inc'
 import assoc from 'ramda/src/assoc'
-
 import { ADD_PRODUCT, REMOVE_PRODUCT } from './actions'
 
 const incrementProductCount = (productId, state) =>

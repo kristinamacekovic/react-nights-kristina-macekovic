@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { connect } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import Layout from '../../components/Layout'
 import { H1 } from '../../components/Typography'
@@ -8,10 +9,8 @@ import { Form, GlobalFormError } from '../../components/Form'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import * as customerActions from '../../store/customer/actions'
-import { getCustomer } from '../../utils/customer'
-import { getCustomerToken } from '../../api/customers/get-customer-token'
+import { AsyncValidationError } from '../../utils/errors'
 import { schema } from './schema'
-import * as routes from '../../routes'
 
 const initialValues = {
   email: '',
@@ -19,27 +18,34 @@ const initialValues = {
 }
 
 const LoginPage = ({ login, history }) => {
-  const [globalError, setGlobalError] = useState('')
+  const [formAsyncError, setFormAsyncError] = useState('')
 
   const handleSubmit = async ({ email, password }, { setSubmitting }) => {
     try {
       setSubmitting(true)
-      const { ownerId } = await getCustomerToken({
+
+      await login({
         username: email,
-        password
+        password,
+        push: history.push
       })
-      const customerInfo = await getCustomer(ownerId)
-      login(customerInfo)
-      history.push(routes.ACCOUNT)
     } catch (error) {
-      setGlobalError(error.message)
+      if (error instanceof AsyncValidationError) {
+        setFormAsyncError(error.message)
+      } else {
+        toast.error(
+          `There was an error while logging in, please try again later!`
+        )
+        // This would be nice place to log errors to some external service
+      }
+    } finally {
+      setSubmitting(false)
     }
-    setSubmitting(false)
   }
 
   return (
     <Layout>
-      <H1>Login</H1>
+      <H1 textAlign='center'>Log In</H1>
       <Formik
         initialValues={initialValues}
         validationSchema={schema}
@@ -47,13 +53,13 @@ const LoginPage = ({ login, history }) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            {Boolean(globalError) && (
-              <GlobalFormError>{globalError}</GlobalFormError>
+            {Boolean(formAsyncError) && (
+              <GlobalFormError>{formAsyncError}</GlobalFormError>
             )}
-            <Input name='email' label='Email' type='email' />
-            <Input name='password' label='Password' type='password' />
+            <Input name='email' type='email' label='Email address' />
+            <Input name='password' type='password' label='Password' />
             <Button disabled={isSubmitting}>
-              {isSubmitting ? 'Logging In...' : 'Login'}
+              {isSubmitting ? 'Logging In...' : 'Log In'}
             </Button>
           </Form>
         )}

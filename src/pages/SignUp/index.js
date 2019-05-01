@@ -9,9 +9,7 @@ import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import * as customerActions from '../../store/customer/actions'
 import { createCustomer } from '../../api/customers/create-customer'
-import { getCustomer } from '../../api/customers/get-customer'
 import { schema } from './schema'
-import * as routes from '../../routes'
 
 const initialValues = {
   firstName: '',
@@ -23,13 +21,18 @@ const initialValues = {
 const SignUpPage = ({ login, history }) => {
   const [globalError, setGlobalError] = useState('')
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (
+    { email, password, firstName },
+    { setSubmitting }
+  ) => {
     try {
       setSubmitting(true)
-      const { ownerId } = await createCustomer(values)
-      const customer = await getCustomer(ownerId)
-      login(customer)
-      history.push(routes.ACCOUNT)
+      await createCustomer({ email, password, firstName })
+      await login({
+        username: email,
+        password,
+        push: history.push
+      })
     } catch (error) {
       setGlobalError(error.message)
     }
