@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "formik": "^1.5.2",
+    "jest-styled-components": "^6.3.1",
     "normalize.css": "^8.0.1",
     "qs": "^6.7.0",
     "ramda": "^0.26.1",
@@ -23,11 +24,21 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "format": "prettier --write '*/**/*.{js,css,md,json}'",
     "lint:js": "eslint . --fix",
-    "lint:css": "stylelint 'src/**/*.js'"
+    "lint:css": "stylelint 'src/**/*.js'",
+    "cypress:open": "cypress open"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!/node_modules/",
+      "!src/index.js",
+      "!src/serviceWorker.js",
+      "!src/store/index.js"
+    ]
   },
   "lint-staged": {
     "*.{js}": [
@@ -55,11 +66,15 @@
   "devDependencies": {
     "@strv/eslint-config-react": "^1.0.1",
     "@strv/stylelint-config-styled-components": "^1.0.0",
+    "cypress": "^3.2.0",
     "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-cypress": "^2.2.1",
     "eslint-plugin-react-hooks": "^1.6.0",
+    "fetch-mock": "^7.3.3",
     "husky": ">=1",
     "lint-staged": ">=8",
     "prettier": "^1.16.4",
+    "react-testing-library": "^7.0.0",
     "stylelint": "^9.10.1"
   }
 }
