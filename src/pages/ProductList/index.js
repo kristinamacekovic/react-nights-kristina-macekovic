@@ -1,65 +1,77 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
+import qs from 'qs'
+import compose from 'ramda/src/compose'
+import prop from 'ramda/src/prop'
+import tail from 'ramda/src/tail'
+
+import { getSKUs } from '../../api/products/get-SKUs'
+import { useApi } from '../../api/use-api'
 
 import Layout from '../../components/Layout'
-import Loader from '../../components/Loader'
-import { getSKUs } from '../../api/get-SKUs'
-import { addProduct } from '../../store/cartItems/actions'
-import { loadProducts } from '../../store/products/actions'
-import Product from './Product'
+import { Loader } from '../../components/Loader'
+import { H1 } from '../../components/Typography'
+import { Pagination } from '../../components/Pagination'
+
+import * as cartActions from '../../store/cartItems/actions'
+import { Product } from './Product'
 import { ProductsWrap } from './styled'
+import { PAGE_DEFAULT, PAGE_SIZE_DEFAULT } from '../../constants'
 
-class Products extends Component {
-  state = {
-    isLoading: true,
+const getUrlParams = compose(
+  qs.parse,
+  tail,
+  prop('search')
+)
+
+const Products = ({ match, location, addProduct, history }) => {
+  const { page = PAGE_DEFAULT, size = PAGE_SIZE_DEFAULT } = getUrlParams(
+    location
+  )
+
+  const { data: res, isLoading } = useApi(
+    () => getSKUs({ page: { number: page, size } }),
+    [page, size]
+  )
+
+  const handleAddToCart = productId => addProduct(productId)
+  const handleSizeChange = newSize => {
+    history.push(`/products?page=${page}&size=${newSize}`)
   }
 
-  async componentDidMount() {
-    const products = await getSKUs()
-    this.props.loadProducts(products)
-
-    this.setState({
-      isLoading: false,
-    })
-  }
-
-  handleAddToCart = (productId, evt) => {
-    evt.preventDefault()
-    this.props.addProduct(productId)
-  }
-
-  render() {
-    return (
-      <Layout>
-        {!this.props.products ? (
-          <Loader />
-        ) : (
+  return (
+    <Layout>
+      <H1 textAlign='center'>E-Commerce app</H1>
+      {isLoading && <Loader />}
+      {res && (
+        <>
+          <Pagination
+            pages={res.meta.page_count}
+            activePage={match.params.page}
+            size={size}
+            onSizeChange={handleSizeChange}
+          />
           <ProductsWrap>
-            {this.props.products.map(product => (
+            {res.data.map(product => (
               <Product
                 key={product.id}
                 node={product}
-                onAddToCart={this.handleAddToCart}
+                onAddToCart={handleAddToCart}
               />
             ))}
           </ProductsWrap>
-        )}
-      </Layout>
-    )
-  }
+        </>
+      )}
+    </Layout>
+  )
 }
 
-const mapStateToProps = state => ({
-  products: state.products,
-})
-
 const mapDispatchToProps = {
-  loadProducts,
-  addProduct,
+  addProduct: cartActions.addProduct
 }
 
 const ProductList = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Products)
 

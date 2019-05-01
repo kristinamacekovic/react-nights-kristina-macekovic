@@ -1,32 +1,32 @@
-import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React, { Fragment } from 'react'
+import { connect } from 'react-redux'
 
-const Wrapper = styled.div`
-  padding: 2rem;
-`
+import * as routes from '../../routes'
+import { Wrapper, Header, StyledLink } from './styled'
 
-const Header = styled.header`
-  padding: 3rem;
-  border-bottom: 0.1rem solid gainsboro;
-`
+const Layout = ({ isAuth, children }) => (
+  <Fragment>
+    <Header>
+      <StyledLink to={routes.PRODUCT_LIST}>All Products</StyledLink>
+      <StyledLink to={routes.CART}>My Cart</StyledLink>
+      {isAuth ? (
+        <>
+          <StyledLink to={routes.ACCOUNT}>My Profile</StyledLink>
+          <StyledLink to={routes.LOGOUT}>Logout</StyledLink>
+        </>
+      ) : (
+        <>
+          <StyledLink to={routes.LOGIN}>Login</StyledLink>
+          <StyledLink to={routes.SIGN_UP}>Sign Up</StyledLink>
+        </>
+      )}
+    </Header>
+    <Wrapper>{children}</Wrapper>
+  </Fragment>
+)
 
-const StyledLink = styled(Link)`
-  margin-right: 1rem;
-`
+const mapStateToProps = state => ({
+  isAuth: Object.keys(state.customer).length !== 0
+})
 
-class Layout extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Header>
-          <StyledLink to="/">All Products</StyledLink>
-          <StyledLink to="/cart">My Cart</StyledLink>
-        </Header>
-        <Wrapper>{this.props.children}</Wrapper>
-      </Fragment>
-    )
-  }
-}
-
-export default Layout
+export default connect(mapStateToProps)(Layout)

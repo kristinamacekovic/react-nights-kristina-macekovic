@@ -1,4 +1,5 @@
 import 'normalize.css'
+import 'react-toastify/dist/ReactToastify.css'
 import { createGlobalStyle } from 'styled-components'
 
 import presets from './global/presets'
