@@ -21,12 +21,17 @@ const CartItem = ({ productId, quantity, removeProduct }) => {
   return (
     <li key={productId}>
       {isLoading && <Loader small />}
-      <p>
-        {getName(product)} - {quantity}
-      </p>
-      <RemoveButton type='button' onClick={() => removeProduct(productId)}>
-        Remove
-      </RemoveButton>
+      {!isLoading && (
+        <div>
+          <p>
+            {/* and finally here we try to get name from downloaded product */}
+            {getName(product)} - {quantity}
+          </p>
+          <RemoveButton type="button" onClick={() => removeProduct(productId)}>
+            Remove
+          </RemoveButton>
+          </div>
+      )}
     </li>
   )
 }

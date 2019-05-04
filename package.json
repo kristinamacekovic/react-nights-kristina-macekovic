@@ -27,7 +27,8 @@
     "eject": "react-scripts eject",
     "format": "prettier --write '*/**/*.{js,css,md,json}'",
     "lint:js": "eslint . --fix",
-    "lint:css": "stylelint 'src/**/*.js'"
+    "lint:css": "stylelint 'src/**/*.js'",
+    "cypress:open": "cypress open"
   },
   "lint-staged": {
     "*.{js}": [
@@ -55,11 +56,16 @@
   "devDependencies": {
     "@strv/eslint-config-react": "^1.0.1",
     "@strv/stylelint-config-styled-components": "^1.0.0",
+    "cypress": "^3.2.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-react-hooks": "^1.6.0",
+    "fetch-mock": "^7.3.3",
     "husky": ">=1",
+    "jest-styled-components": "^6.3.1",
     "lint-staged": ">=8",
     "prettier": "^1.16.4",
+    "react-test-renderer": "^16.8.6",
+    "react-testing-library": "^7.0.0",
     "stylelint": "^9.10.1"
   }
 }

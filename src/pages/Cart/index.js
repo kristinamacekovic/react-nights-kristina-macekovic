@@ -18,6 +18,7 @@ const CartView = ({ items, removeProduct }) => {
             productId={item.product.id}
             quantity={item.quantity}
             removeProduct={removeProduct}
+            data-testid="product-in-cart"
           />
         ))}
       </ul>

@@ -13,7 +13,7 @@ import {
 import * as routes from '../../../routes'
 
 const Product = ({ node, onAddToCart }) => (
-  <Wrapper>
+  <Wrapper data-testid="product-in-list">
     <Link to={routes.getProductDetailRoute(node.id)}>
       <ImgWrap>
         <Img src={node.image_url} alt={`${node.name} image`} />

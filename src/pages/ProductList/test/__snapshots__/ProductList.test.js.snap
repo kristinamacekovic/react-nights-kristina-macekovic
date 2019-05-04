@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[pages] ProductsList when loading should render correctly 1`] = `
+<div>
+  <div
+    class="Toastify"
+  />
+  <h2>
+    Sorry, there is an error, please try refreshing the page.
+  </h2>
+</div>
+`;
