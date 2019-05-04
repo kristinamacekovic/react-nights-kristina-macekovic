@@ -18,8 +18,8 @@ const PrivateRouteComponent = ({ isAuth, component: Component, ...rest }) => {
             to={{
               pathname: routes.LOGIN,
               state: {
-                from: routeProps.location.pathname
-              }
+                from: routeProps.location.pathname,
+              },
             }}
           />
         )
@@ -29,7 +29,7 @@ const PrivateRouteComponent = ({ isAuth, component: Component, ...rest }) => {
 }
 
 const mapStateToProps = state => ({
-  isAuth: !isEmpty(state.customer)
+  isAuth: !isEmpty(state.customer),
 })
 
 export const PrivateRoute = connect(mapStateToProps)(PrivateRouteComponent)

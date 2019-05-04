@@ -24,26 +24,10 @@ const dash = keyframes`
 
 const LoaderWrap = styled.div`
   width: 100%;
-  ${props =>
-    !props.small &&
-    css`
-      padding: 5rem 0;
-    `};
-  ${props =>
-    props.small &&
-    css`
-      transform: scale(0.5)
-      width: 5rem
-      height: 5rem
-    `};
+  transform: scale(0.5);
+  width: 5rem;
+  height: 5rem;
   padding: 5rem 0;
-  ${props =>
-    props.small &&
-    css`
-      transform: scale(0.5);
-      width: 5rem;
-      height: 5rem;
-    `};
 `
 
 const StyledLoader = styled.div`
@@ -60,7 +44,7 @@ const Circular = styled.svg`
 `
 
 const Path = styled.circle`
-  stroke: ${props => (props.white ? '#fff' : presets.color.red)};
+  stroke: ${presets.color.red};
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
   animation: ${dash} 1.5s ease-in-out infinite;

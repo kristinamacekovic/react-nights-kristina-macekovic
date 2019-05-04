@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { LoaderWrap, StyledLoader, Circular, Path } from './styled'
 
-export const Loader = props => (
+export type LoaderProps = {
+  props?: {
+    small?: boolean
+  }
+}
+
+export const Loader: FC<LoaderProps> = props => (
   <LoaderWrap {...props}>
     <StyledLoader>
       <Circular viewBox="25 25 50 50">

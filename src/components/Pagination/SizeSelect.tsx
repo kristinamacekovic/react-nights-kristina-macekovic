@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { PAGE_SIZE_OPTIONS } from '../../constants'
 
-const SizeSelect = ({ onChange, value }) => {
-  const handleChange = event => {
-    const newValue = event.target.value
+type SizeSelectProps = {
+  onChange(newValue: string): void
+  value: string
+}
+
+const SizeSelect = ({ onChange, value }: SizeSelectProps) => {
+  const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    const newValue = event.currentTarget.value
 
     if (newValue !== value) {
       onChange(newValue)

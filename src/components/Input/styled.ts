@@ -12,9 +12,14 @@ export const Label = styled.label`
   color: ${presets.color.purple};
 `
 
+type InputProps = {
+  hasError: boolean
+}
+
 export const StyledInput = styled.input`
   border: 2px solid
-    ${({ hasError }) => (hasError ? presets.color.red : presets.color.gray)};
+    ${({ hasError }: InputProps) =>
+      hasError ? presets.color.red : presets.color.gray};
   border-radius: ${presets.radius.basic};
   padding: 1rem 1.2rem;
 `
