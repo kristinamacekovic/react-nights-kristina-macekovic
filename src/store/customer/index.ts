@@ -1,7 +1,7 @@
 import { LOGOUT, LOGIN_SUCCESS, CustomerAction } from './actions'
 import { CustomerType } from '../../global/types'
 
-type CustomerState = CustomerType | null
+export type CustomerState = CustomerType | null
 
 const initialState = null
 

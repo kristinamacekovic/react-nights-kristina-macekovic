@@ -27,11 +27,11 @@ const CartView = ({ items, removeProduct }) => {
 }
 
 const mapStateToProps = state => ({
-  items: cartSelectors.getCartItems(state)
+  items: cartSelectors.getCartItems(state),
 })
 
 const mapDispatchToProps = {
-  removeProduct: cartActions.removeProduct
+  removeProduct: cartActions.removeProduct,
 }
 
 const Cart = connect(

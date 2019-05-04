@@ -41,7 +41,7 @@ const Products = ({ match, location, addProduct, history }) => {
 
   return (
     <Layout>
-      <H1 textAlign='center'>E-Commerce app</H1>
+      <H1 textAlign="center">E-Commerce app</H1>
       {isLoading && <Loader />}
       {res && (
         <>
@@ -67,7 +67,7 @@ const Products = ({ match, location, addProduct, history }) => {
 }
 
 const mapDispatchToProps = {
-  addProduct: cartActions.addProduct
+  addProduct: cartActions.addProduct,
 }
 
 const ProductList = connect(

@@ -6,7 +6,7 @@ import compose from 'ramda/src/compose'
 const getStateCart = prop('cartItems')
 const createCartItem = ([productId, quantity]) => ({
   quantity,
-  product: { id: productId }
+  product: { id: productId },
 })
 
 export const getCartItems = compose(
