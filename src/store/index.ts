@@ -5,10 +5,13 @@ import customer from './customer/index'
 
 const reducer = combineReducers({
   cartItems,
-  customer
+  customer,
 })
 
+// @ts-ignore
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+export type AppState = ReturnType<typeof reducer>
 
 export const configureStore = (preloadedState = {}) =>
   createStore(

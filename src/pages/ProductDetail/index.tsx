@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { FC } from 'react'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { useApi } from '../../api/use-api'
-import { addProduct } from '../../store/cartItems/actions'
+import * as cartActions from '../../store/cartItems/actions'
 import { getProductDetail } from '../../api/products/getProductDetail'
 import Layout from '../../components/Layout'
 import { Loader } from '../../components/Loader'
@@ -19,7 +19,10 @@ import {
 } from './styled'
 import * as routes from '../../routes'
 
-const ProductView = ({ match, addProduct }) => {
+type Props = typeof mapDispatchToProps &
+  RouteComponentProps<{ productId: string }>
+
+const ProductView: FC<Props> = ({ match, addProduct }) => {
   const { productId } = match.params
 
   const { data: product, isLoading } = useApi(
@@ -42,12 +45,6 @@ const ProductView = ({ match, addProduct }) => {
               <ProductDetailTitle>{product.name}</ProductDetailTitle>
             </TitleWrap>
             <Description>
-              <Accent>Last Updated:</Accent> {product.updated_at}
-            </Description>
-            <Description>
-              <Accent>Reference:</Accent> {product.reference}
-            </Description>
-            <Description>
               <Accent>Description:</Accent> {product.description}
             </Description>
             <Description>
@@ -64,13 +61,11 @@ const ProductView = ({ match, addProduct }) => {
   )
 }
 
-const actionCreators = {
-  addProduct,
-}
+const mapDispatchToProps = { addProduct: cartActions.addProduct }
 
 const ProductDetail = connect(
   null,
-  actionCreators
+  mapDispatchToProps
 )(ProductView)
 
 export { ProductDetail }

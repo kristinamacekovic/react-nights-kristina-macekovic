@@ -1,10 +1,13 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, FC } from 'react'
 import { connect } from 'react-redux'
 
 import * as routes from '../../routes'
 import { Wrapper, Header, StyledLink } from './styled'
+import { AppState } from '../../store'
 
-const Layout = ({ isAuth, children }) => (
+type Props = ReturnType<typeof mapStateToProps>
+
+const Layout: FC<Props> = ({ isAuth, children }) => (
   <Fragment>
     <Header>
       <StyledLink to={routes.PRODUCT_LIST}>All Products</StyledLink>
@@ -25,8 +28,8 @@ const Layout = ({ isAuth, children }) => (
   </Fragment>
 )
 
-const mapStateToProps = state => ({
-  isAuth: Object.keys(state.customer).length !== 0
+const mapStateToProps = (state: AppState) => ({
+  isAuth: Boolean(state.customer),
 })
 
 export default connect(mapStateToProps)(Layout)

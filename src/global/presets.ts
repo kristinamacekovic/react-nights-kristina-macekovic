@@ -1,6 +1,3 @@
-// contains an object with commonly used css properties
-// that will be used thoughout the project (a _theme_)
-
 const presets = {
   color: {
     black: '#252522',

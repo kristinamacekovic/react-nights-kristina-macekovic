@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 
-const useApi = (fn, resolveCondition = []) => {
-  const [data, setData] = useState(null)
+const useApi = <T>(
+  fn: (...args: any[]) => Promise<T>,
+  resolveCondition: ReadonlyArray<any> = []
+) => {
+  const [data, setData] = useState<T>(null!)
   const [isLoading, setLoading] = useState(false)
 
   if (!Array.isArray(resolveCondition)) {
@@ -9,7 +12,7 @@ const useApi = (fn, resolveCondition = []) => {
     console.error('Resolve condition for useEffect hook is not an Array')
   }
 
-  const request = (...args) => {
+  const request = (...args: any[]) => {
     setLoading(true)
     fn(...args)
       .then(returnedData => setData(returnedData))
@@ -23,7 +26,7 @@ const useApi = (fn, resolveCondition = []) => {
   return {
     request,
     data,
-    isLoading
+    isLoading,
   }
 }
 
