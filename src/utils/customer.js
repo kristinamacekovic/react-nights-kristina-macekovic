@@ -1,5 +1,7 @@
+import { isBrowser } from './is-browser'
+
 export const getCustomer = () => {
-  const customer = window.localStorage.getItem('customer')
+  const customer = isBrowser() && window.localStorage.getItem('customer')
   if (customer) {
     return JSON.parse(customer)
   }
@@ -7,9 +9,10 @@ export const getCustomer = () => {
 }
 
 export const setCustomer = customer => {
-  window.localStorage.setItem('customer', JSON.stringify(customer))
+  isBrowser() &&
+    window.localStorage.setItem('customer', JSON.stringify(customer))
 }
 
 export const removeCustomer = () => {
-  window.localStorage.removeItem('customer')
+  isBrowser() && window.localStorage.removeItem('customer')
 }

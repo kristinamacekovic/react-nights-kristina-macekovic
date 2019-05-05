@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-typescript": "^1.1.1",
+    "express": "^4.16.4",
     "formik": "^1.5.2",
+    "next": "^8.1.0",
+    "next-redux-wrapper": "^3.0.0-alpha.2",
     "normalize.css": "^8.0.1",
     "qs": "^6.7.0",
     "ramda": "^0.26.1",
@@ -21,8 +26,9 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write '*/**/*.{js,css,md,json}'",
@@ -57,6 +63,7 @@
     "@strv/eslint-config-react": "^1.0.1",
     "@strv/stylelint-config-styled-components": "^1.0.0",
     "@types/jest": "^24.0.12",
+    "@types/next": "^8.0.5",
     "@types/node": "^12.0.0",
     "@types/qs": "^6.5.3",
     "@types/ramda": "^0.26.8",

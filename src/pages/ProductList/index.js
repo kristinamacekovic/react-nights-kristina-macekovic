@@ -14,6 +14,7 @@ import { H1 } from '../../components/Typography'
 import { Pagination } from '../../components/Pagination'
 
 import * as cartActions from '../../store/cartItems/actions'
+import * as productActions from '../../store/products/actions'
 import { Product } from './Product'
 import { ProductsWrap } from './styled'
 import { PAGE_DEFAULT, PAGE_SIZE_DEFAULT } from '../../constants'
@@ -41,7 +42,7 @@ const Products = ({ match, location, addProduct, history }) => {
 
   return (
     <Layout>
-      <H1 textAlign="center">E-Commerce app</H1>
+      <H1 textAlign='center'>E-Commerce app</H1>
       {isLoading && <Loader />}
       {res && (
         <>
@@ -66,8 +67,17 @@ const Products = ({ match, location, addProduct, history }) => {
   )
 }
 
+// eslint-disable-next-line no-unused-vars
+const getInitialProps = async ({ store, query }) => {
+  const { page = PAGE_DEFAULT, size = PAGE_SIZE_DEFAULT } = query
+
+  const res = await getSKUs({ page: { number: page, size } })
+  store.dispatch(productActions.loadProducts(res.data))
+  return { page, size, isLoading: false, res }
+}
+
 const mapDispatchToProps = {
-  addProduct: cartActions.addProduct,
+  addProduct: cartActions.addProduct
 }
 
 const ProductList = connect(

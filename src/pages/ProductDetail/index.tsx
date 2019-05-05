@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Link from 'next/link'
 
-import { useApi } from '../../api/use-api'
 import * as cartActions from '../../store/cartItems/actions'
+import * as productActions from '../../store/products/actions'
 import { getProductDetail } from '../../api/products/getProductDetail'
-import Layout from '../../components/Layout'
 import { Loader } from '../../components/Loader'
 import {
   ProductDetailWrapper,
@@ -19,18 +18,17 @@ import {
 } from './styled'
 import * as routes from '../../routes'
 
-type Props = typeof mapDispatchToProps &
-  RouteComponentProps<{ productId: string }>
+type Props = typeof mapDispatchToProps
+type InitialProps = UnPromisify<ReturnType<typeof getInitialProps>>
+type EnchancedProps = Props & InitialProps
 
-const ProductView: FC<Props> = ({ match, addProduct }) => {
-  const { productId } = match.params
-
-  const { data: product, isLoading } = useApi(
-    () => getProductDetail(productId),
-    [productId]
-  )
+const ProductView: FC<EnchancedProps> = ({
+  isLoading,
+  product,
+  addProduct,
+}) => {
   return (
-    <Layout>
+    <main>
       {isLoading && <Loader />}
       {product && (
         <>
@@ -53,12 +51,23 @@ const ProductView: FC<Props> = ({ match, addProduct }) => {
             <AddButton onClick={() => addProduct(product.id)}>
               Add to Cart
             </AddButton>
-            <Link to={routes.PRODUCT_LIST}>Back</Link>
+            <Link href={routes.PRODUCT_LIST}>
+              <a>Back</a>
+            </Link>
           </ProductDetailWrapper>
         </>
       )}
-    </Layout>
+    </main>
   )
+}
+
+type IProps = { product: any; isLoading: boolean }
+type CTX = NextContext<{ id: string }> & { store: ReduxStore }
+
+const getInitialProps = async (ctx: CTX) => {
+  const product = await getProductDetail(ctx.query.id)
+  ctx.store.dispatch(productActions.loadProduct(product))
+  return { product, isLoading: false }
 }
 
 const mapDispatchToProps = { addProduct: cartActions.addProduct }
@@ -67,5 +76,7 @@ const ProductDetail = connect(
   null,
   mapDispatchToProps
 )(ProductView)
+
+ProductDetail.getInitialProps = getInitialProps
 
 export { ProductDetail }
