@@ -2,12 +2,12 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
 import App, { Container } from 'next/app'
-import { withRedux } from 'next-redux-wrapper'
+import withRedux from 'next-redux-wrapper'
 
 import GlobalStyles from './GlobalStyles'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { configureStore } from './store'
-import { Layout } from '../src/components/Layout'
+import Layout from '../src/components/Layout'
 
 class MyApp extends App {
   static async getInitialProps (Component, ctx) {
